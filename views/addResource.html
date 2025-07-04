@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/map.css">
+    <title>Add Resource</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcD5_wggh7QnUz1XOE1F-FMijRhZhMC8U"></script>
+    <script src="/js/addResource.js"></script>
+    <script type="module" src="/js/socketClient.js"></script>
+</head>
+<body>
+    <header class="sticky-header">
+        <nav>
+            <button id="back-button" class="btn">Back</button>
+        </nav>
+    </header>
+    <main>
+        <h1 class="text-center">Add Resource</h1>
+        <div id="add-map-container">
+            <div id="map"></div>
+        </div>
+        <form id="add-resource-form">
+            <label for="resource-title">Title:</label>
+            <input type="text" id="resource-title" required>
+            <label for="resource-description">Description:</label>
+            <textarea id="resource-description" required></textarea>
+            <p id="map-instruction">Select a location on map and fill in all fields.</p>
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+</body>
+</html>

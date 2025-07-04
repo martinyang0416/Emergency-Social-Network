@@ -1,0 +1,183 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.sticky-header {
+    position: sticky;
+    bottom: 10px;
+    background: linear-gradient(to right, #00b894, #00cec9);
+    z-index: 1000;
+    padding: 20px;
+    height: 3vh;
+}
+
+#back-button {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#back-button:hover {
+    background-color: #0056b3;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+
+/* Loading Spinner Styles */
+.loading-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    z-index: 1000;
+}
+
+@keyframes spin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+#map-container {
+    width: 95%;
+    height: 70vh;
+    position: relative;
+    border-radius: 10px;
+}
+
+#add-map-container {
+    width: 95%;
+    height: 50vh;
+    position: relative;
+    border-radius: 10px;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ddd;
+}
+
+#add-resource-btn {
+    display: block;
+    margin: 30px auto;
+    padding: 10px 20px;
+    background-color: #00cec9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#add-resource-btn:hover {
+    background-color: #218838;
+}
+
+/* Modal styles */
+.hidden {
+    display: none;
+}
+
+#add-resource-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#add-resource-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+}
+
+#add-resource-form label {
+    margin-bottom: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align:left;
+}
+
+#add-resource-form input,
+#add-resource-form textarea {
+    margin-bottom: 5px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 95%;
+}
+
+#map-instruction {
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+    padding: 5px;
+    margin: 0;
+}
+
+
+#add-resource-form button {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#add-resource-form button[type="submit"] {
+    background-color: #00cec9;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+#add-resource-form button[type="button"] {
+    background-color: #ccc;
+}
+
+#update-btn {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #00cec9;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+}

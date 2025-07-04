@@ -1,0 +1,84 @@
+body,
+html {
+    height: 100%;
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+}
+
+.container-fluid {
+    display: flex;
+    height: 100vh;
+}
+
+.left-section,
+.right-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.left-section {
+    background-color: #ffffff;
+    flex: 1;
+}
+
+.right-section {
+    background: linear-gradient(to right, #00b894, #00cec9);
+    color: white;
+    flex: 1;
+}
+
+.left-content {
+    text-align: center;
+}
+
+.left-content h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.left-content p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    color: #555;
+}
+
+.btn-join {
+    padding: 12px 25px;
+    font-size: 1rem;
+    background-color: #00b894;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-join:hover {
+    background-color: #01986b;
+}
+
+.right-content h2 {
+    font-size: 2rem;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .container-fluid {
+        flex-direction: column;
+    }
+
+    .left-content h1 {
+        font-size: 2rem;
+    }
+
+    .left-content p {
+        font-size: 1rem;
+    }
+
+    .right-content h2 {
+        font-size: 1.5rem;
+    }
+}

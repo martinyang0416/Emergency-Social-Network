@@ -1,0 +1,62 @@
+{
+  "name": "f24-fse-sb2",
+  "version": "1.0.0",
+  "description": "FSE Team SB2 Fall 2024 Project",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest --coverage",
+    "start": "nodemon app.js",
+    "sass": "sass --watch public/scss:public/css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cmusv-fse/f24-fse-sb2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cmusv-fse/f24-fse-sb2/issues"
+  },
+  "homepage": "https://github.com/cmusv-fse/f24-fse-sb2#readme",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.701.0",
+    "@aws-sdk/s3-request-presigner": "^3.696.0",
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "express-session": "^1.18.0",
+    "i18next": "^24.0.5",
+    "i18next-express-middleware": "^2.0.0",
+    "i18next-fs-backend": "^2.6.0",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.11.3",
+    "socket.io": "^4.8.0",
+    "ssh2": "^1.15.0",
+    "supertest": "^7.0.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "sweetalert2": "^11.14.1",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.25.8",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "node-mocks-http": "^1.16.1",
+    "nodemon": "^3.1.7",
+    "purgecss": "^6.0.0",
+    "sass": "^1.80.5"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    },
+    "testEnvironment": "node",
+    "test": "jest --detectOpenHandles"
+  }
+}

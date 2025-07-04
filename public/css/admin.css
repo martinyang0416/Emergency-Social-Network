@@ -1,0 +1,81 @@
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 32px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.user-list-section h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 14px;
+    display: none;
+}
+
+.success-message {
+    color: #28a745;
+    font-size: 14px;
+    display: none;
+}
+
+.modal-body label {
+    font-weight: bold;
+    margin-top: 15px;
+    display: block;
+}
+
+.modal-body input,
+.modal-body select {
+    margin-bottom: 10px;
+}
+
+button {
+    transition: background-color 0.3s;
+}
+
+#currentUserInfo p {
+    margin: 0;
+    padding: 5px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+#currentUserInfo span {
+    font-weight: bold;
+    color: #555;
+}
+
+#validationMessage p {
+    margin: 0;
+}
+
+.text-danger {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.text-success {
+    color: #28a745;
+    font-weight: bold;
+}

@@ -1,0 +1,1 @@
+/views display all frontend pages in client side

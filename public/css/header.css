@@ -1,0 +1,476 @@
+/* Sticky Header */
+.sticky-header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(to right, #00b894, #00cec9);
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1050;
+}
+
+/* Navbar Layout */
+.navbar .container-fluid {
+    display: flex;
+    flex-direction: column; /* Stacks h1 and nav */
+    align-items: center;
+    padding: 10px 0;
+}
+
+/* Header Title */
+h1 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 35px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Navbar Links Layout */
+.navbar-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Wrap links if needed for small screens */
+    gap: 10px;
+}
+
+/* Navbar Links */
+.navbar-nav .nav-link {
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    color: white;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.navbar-nav .nav-link:not(.active):hover {
+    background-color: white;
+    color: #00b894 !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-nav .nav-link:not(.active) {
+    background-color: transparent;
+    color: white;
+}
+
+button.btn-primary {
+    background-color: #00b894;
+    border: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button.btn-primary:hover {
+    background-color: #00cec9;
+    color: white;
+}
+
+/* Alert Icon Styling */
+.admin-icon,
+.alert-icon,
+.status-icon {
+    border: 2px solid white;
+    background-color: transparent;
+    color: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    padding: 0;
+}
+
+.alert-icon:hover,
+.status-icon:hover {
+    border-color: #00b894;
+    color: #00b894;
+}
+
+/* Share Status Dropdown */
+#share-status,
+#choose-status {
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 10px;
+    right: 0;
+    top: 45px;
+    z-index: 999;
+}
+
+.dropdown-item .material-symbols-outlined {
+    margin-right: 8px;
+    font-size: 24px;
+}
+
+.dropdown-item:hover {
+    background-color: #00b894;
+    color: white;
+    border-radius: 3px;
+}
+
+/* Dropdown Menu Styling */
+.dropdown-menu {
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 999;
+}
+
+/* Full-width Search Section */
+.search-section {
+    width: 100%;
+    padding: 0.5rem 2rem !important;
+}
+
+/* Centered Dropdown Container */
+.centered-dropdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+/* Search Results Container */
+#search-results {
+    padding: 1rem;
+    border: 1px solid #ddd;
+    overflow-y: auto;
+    color: black;
+    background-color: #ffffff;
+}
+
+.search-result-item {
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.3s ease;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item:hover {
+    background-color: #f5f5f5;
+}
+
+.search-result-item .material-symbols-outlined {
+    font-size: 24px;
+}
+
+.search-result-item strong {
+    font-size: 16px;
+    color: #333;
+}
+
+/* Styling for individual search result items */
+#search-results .search-result-item {
+    color: black;
+    padding: 0.5rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+#search-results .search-result-item:last-child {
+    border-bottom: none;
+}
+
+/* Search Bar */
+.searchBar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+/* General Search Bar Styling */
+#headerSearchForm {
+    width: 100%;
+    max-width: 600px; /* Default max width */
+    margin: auto;
+    position: relative;
+}
+
+#header-search-input {
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    transition: border-color 0.3s ease, width 0.3s ease;
+    width: 100%; /* Full-width input */
+    box-sizing: border-box;
+}
+
+#header-search-input:focus {
+    outline: none;
+    border-color: #00b894;
+    box-shadow: 0 0 5px rgba(0, 184, 148, 0.3);
+}
+
+/* Search Icon Button */
+.search-icon-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.search-icon {
+    font-family: "Material Symbols Outlined";
+    font-size: 20px;
+    color: #777;
+    transition: color 0.3s ease;
+}
+
+.search-icon:hover {
+    color: #00b894;
+}
+
+/* Button Group Styling for aligning buttons on the same line */
+.button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Space between buttons */
+    margin-top: 1rem;
+}
+
+/* Individual Button Styling in Button Group */
+.button-group .btn {
+    font-size: 16px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 10px;
+}
+
+/* Dropdown Button */
+#listAllUsersDropdown {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    color: #495057;
+    border-color: #ced4da;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Ensure First and Second Rows Have Equal Height */
+.navbar .container-fluid > .d-flex {
+    min-height: 60px;
+    align-items: center;
+}
+
+/* Fullscreen height for search-section */
+/* .search-section.fullscreen-height {
+    height: 100vh;
+    overflow-y: auto;           
+    background-color: white;   
+    position: relative;        
+} */
+
+/* Modal Overlay and Base Container Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+}
+
+#popout-container-wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 600px;
+    z-index: 1000;
+}
+
+/* Popout Container */
+.popout-container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-height: 80vh;
+}
+
+/* Popup Header */
+.popup-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    border-radius: 8px 8px 0 0;
+}
+
+.popup-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Content Area */
+#search-results-content {
+    padding: 20px;
+    overflow-y: auto;
+    flex-grow: 1;
+
+    /* Custom Scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: #00b894 #f0f0f0;
+}
+
+#search-results-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+#search-results-content::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 4px;
+}
+
+#search-results-content::-webkit-scrollbar-thumb {
+    background: #00b894;
+    border-radius: 4px;
+}
+
+#search-results-content::-webkit-scrollbar-thumb:hover {
+    background: #00cec9;
+}
+
+/* Popup Footer */
+.popup-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: center;
+    background: white;
+    border-radius: 0 0 8px 8px;
+}
+
+/* Button Styles */
+.stop-button {
+    background-color: #00b894;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.stop-button:hover {
+    background-color: #00cec9;
+}
+
+.more-button {
+    background-color: #00b894;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.more-button:hover {
+    background-color: #00cec9;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+    padding: 0 5px;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover {
+    color: #00b894;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    #popout-container-wrapper {
+        width: 95%;
+    }
+
+    .popup-header {
+        padding: 10px 15px;
+    }
+
+    .popup-footer {
+        padding: 10px 15px;
+    }
+
+    .stop-button,
+    .more-button {
+        padding: 5px 12px;
+        font-size: 14px;
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 28px;
+    }
+
+    .navbar-nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar-nav .nav-link {
+        margin-right: 0;
+        font-size: 16px;
+    }
+
+    #headerSearchForm {
+        width: 90%;
+    }
+
+    #header-search-input {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .search-icon {
+        font-size: 18px;
+        right: 8px;
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    #stop,
+    #more {
+        width: 90%;
+    }
+}

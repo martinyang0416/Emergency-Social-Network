@@ -1,0 +1,217 @@
+/* General Styles */
+body {
+    font-family: "Montserrat", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+#header-placeholder {
+    margin-bottom: 20px;
+}
+
+/* Add Card Form Container */
+.add-card-container {
+    width: 90%;
+    max-width: 400px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px 25px;
+    text-align: center;
+    margin: 20px auto;
+    /* Center it below the header */
+}
+
+/* Form Inputs */
+.card-form .form-group {
+    margin-bottom: 15px;
+}
+
+.card-form input[type="text"],
+.card-form input[type="number"] {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background-color: #f8f9fa;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-form input[type="text"]:focus,
+.card-form input[type="number"]:focus {
+    outline: none;
+    border-color: #00b894;
+    box-shadow: 0 0 6px rgba(0, 184, 148, 0.4);
+    background-color: white;
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #ddd;
+    color: #888;
+    border: none;
+    border-radius: 8px;
+    cursor: not-allowed;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.submit-btn:enabled {
+    background-color: #00b894;
+    color: white;
+    cursor: pointer;
+}
+
+.submit-btn:enabled:hover {
+    background-color: #00cec9;
+}
+
+/* Row Input Fields */
+.card-form .form-row .form-group {
+    margin-bottom: 10px;
+}
+
+/* Placeholder Styling */
+.card-form input::placeholder {
+    color: #aaa;
+    font-size: 14px;
+}
+
+/* Linked Cards Section */
+.linked-cards-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Center cards horizontally */
+    margin-top: 20px;
+}
+
+.linked-cards-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+/* Credit Card Styling */
+.credit-card {
+    background-color: #18181b;
+    color: #a1a1aa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 15px -5px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
+    width: 400px;
+    /* Fixed card width */
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 20px;
+    /* Space between cards */
+}
+
+/* Hover Effect */
+.credit-card:hover {
+    transform: scale(1.02);
+}
+
+/* Head Section */
+.head,
+.number,
+.tail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    z-index: 10;
+}
+
+.head {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+/* Card Number Styling */
+.number {
+    margin-top: auto;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+    color: #d4d4d8;
+}
+
+/* Expiration Section */
+.exp {
+    font-size: 0.8rem;
+}
+
+.exp-date {
+    color: #d4d4d8;
+    font-size: 1.3rem;
+}
+
+/* Decorative Circles */
+.circle1 {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-color: #991b1b;
+    border-radius: 100%;
+    transform: translateY(-30%) translateX(100%);
+}
+
+.circle2 {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-color: #854d0e;
+    border-radius: 100%;
+    transform: translateY(160%);
+}
+
+/* Highlight Selected Card */
+.credit-card.selected {
+    border: 2px solid #28a745;
+    box-shadow: 0 0 10px rgba(40, 167, 69, 0.7);
+    transform: scale(1.05);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Error/Empty Placeholder */
+.linked-cards-container p {
+    color: #888;
+    font-size: 16px;
+}
+
+/* Remove Button Styling */
+.remove-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #dc3545;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 20;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.remove-btn:hover {
+    background-color: #c82333;
+    transform: scale(1.1);
+}

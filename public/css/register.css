@@ -1,0 +1,170 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+h1 {
+    font-size: 3rem;
+    font-family: Arial, sans-serif;
+}
+
+h2 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+#content {
+    width: 100vw;
+    height: 100vh;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.register-section,
+.login-section {
+    padding: 50px;
+    box-sizing: border-box;
+}
+
+.register-section {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    padding: 50px;
+    box-sizing: border-box;
+}
+
+.register-section h1 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.register-section h2 {
+    margin-bottom: 30px;
+    color: rgb(91, 89, 89);
+}
+
+#join-form {
+    width: 100%;
+    max-width: 450px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#join-form input::placeholder {
+    color: #aaa;
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+#join-form input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    box-sizing: border-box;
+    font-size: 20px;
+    background: linear-gradient(to right, #edf5f3, #eafbfb);
+}
+
+.btn-custom {
+    width: 70%;
+    padding: 12px;
+    background-color: #00b894;
+    color: white;
+    border: none;
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-custom:hover {
+    background-color: #01986b;
+}
+
+.login-section {
+    background: linear-gradient(to right, #00b894, #00cec9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 20px;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.login-section h1 {
+    margin-bottom: 10px;
+}
+
+.login-section h2 {
+    margin-bottom: 40px;
+}
+
+.login-section button {
+    padding: 12px 25px;
+    width: 60%;
+    background-color: white;
+    color: #02b1ae;
+    border: none;
+    border-radius: 25px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-section button:hover {
+    background-color: #f4f4f4;
+}
+
+@media (max-width: 768px) {
+    #content {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .register-section,
+    .login-section {
+        width: 100%;
+        min-height: 50vh;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 16px;
+    }
+
+    #join-form input {
+        font-size: 14px;
+    }
+
+    .btn-custom,
+    .login-section button {
+        font-size: 16px;
+    }
+}

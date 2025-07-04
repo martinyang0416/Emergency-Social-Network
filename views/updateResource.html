@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/map.css">
+    <title>Update Location</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/updateResource.js" type="module"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcD5_wggh7QnUz1XOE1F-FMijRhZhMC8U"></script>
+</head>
+<body>
+    <header class="sticky-header">
+        <nav>
+            <button id="back-button" class="btn">Back</button>
+        </nav>
+    </header>
+    <main>
+        <h1 class="text-center">Update Location</h1>
+        <div id="map-container">
+            <div id="map"></div>
+        </div>
+        <p id="map-instruction">Select a new location on the map.</p>
+        <button id="update-btn" class="btn btn-primary">Update</button>
+    </main>
+</body>
+</html>

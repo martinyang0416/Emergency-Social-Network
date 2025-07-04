@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/map.css">
+    <title>Map View</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="/js/mapView.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcD5_wggh7QnUz1XOE1F-FMijRhZhMC8U"defer></script>
+    <!-- <script type="module" src="/js/socketClient.js"></script> -->
+</head>
+<body>
+    <header class="sticky-header">
+        <nav>
+            <button id="back-button" class="btn">Back</button>
+        </nav>
+    </header>
+    <main>
+        <div id="loading-spinner" class="loading-spinner"></div>
+        <h1 class="text-center">Map View</h1>
+        <div id="map-container">
+            <div id="map"></div>
+        </div>
+        <button id="add-resource-btn" class="btn">Add Resource</button>
+    </main>
+</body>
+</html>

@@ -1,0 +1,20 @@
+@use 'shared';
+
+.fixed-bottom {
+    padding: 10px;
+    background-color: white;
+    border-top: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+#chat-banner {
+    background-color: #f8f9fa;
+    color: #333;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+#chat-recipient {
+    font-weight: bold;
+    color: #00b894;
+}

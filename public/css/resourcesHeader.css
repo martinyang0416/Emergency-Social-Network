@@ -1,0 +1,94 @@
+/* Sticky Header */
+.sticky-header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(to right, #00b894, #00cec9);
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1050;
+    
+}
+
+/* Navbar Layout */
+.navbar .container-fluid {
+    display: flex;
+    flex-direction: column; /* Stacks h1 and nav */
+    align-items: center;
+}
+
+/* Header Title */
+h1 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 35px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Navbar Links Layout */
+.navbar-nav {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+/* Navbar Links */
+.navbar-nav .nav-link {
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    color: white;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.navbar-nav .nav-link:not(.active):hover {
+    background-color: white;
+    color: #00b894 !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-nav .nav-link:not(.active) {
+    background-color: transparent;
+    color: white;
+    box-shadow: none;
+}
+
+/* Custom SweetAlert Popup for Responsiveness */
+.responsive-swal-popup {
+    width: 100%;
+    max-width: 400px; /* Set a max width for larger screens */
+    padding: 1.5rem;
+}
+
+.responsive-swal-title {
+    font-size: 1.5rem;
+}
+
+.responsive-swal-text {
+    font-size: 1rem;
+}
+
+/* Button Styling */
+.responsive-swal-button {
+    font-size: 1rem;
+    padding: 0.5rem 1.2rem;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 576px) {
+    .responsive-swal-title {
+        font-size: 1.2rem;
+    }
+
+    .responsive-swal-text {
+        font-size: 0.9rem;
+    }
+
+    .responsive-swal-button {
+        font-size: 0.9rem;
+        padding: 0.4rem 1rem;
+    }
+}

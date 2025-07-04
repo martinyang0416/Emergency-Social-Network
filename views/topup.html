@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top-Up or Withdraw</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/topup.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="/js/topup.js"></script>
+    <script type="module" src="/js/socketClient.js"></script>
+    <script type="module" src="/js/header.js"></script>
+</head>
+
+<body>
+    <!-- Placeholder for dynamically inserted header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Top-Up/Withdraw Page Content -->
+    <div class="topup-container">
+        <!-- Mode Toggle Button -->
+        <div class="mode-toggle text-center mb-4">
+            <button id="toggleModeBtn" class="btn btn-secondary">Switch to Withdraw</button>
+        </div>
+
+        <h1 class="title" id="pageTitle">Top-Up Your Wallet</h1>
+
+        <!-- Section for Existing Cards -->
+        <div class="existing-cards-section">
+            <h2 class="section-title" id="cardSectionTitle">Your Linked Cards</h2>
+            <div id="card-list-placeholder">
+                <!-- Placeholder for dynamically loaded cards -->
+                <p>No cards linked yet. Please add a card to top-up.</p>
+            </div>
+        </div>
+
+        <!-- Input Section for Amount -->
+        <div class="topup-input-section">
+            <h2 class="section-title" id="amountSectionTitle">Enter Amount to Top-Up</h2>
+            <form id="topupForm">
+                <div class="form-group">
+                    <input type="number" id="topupAmount" class="form-control" placeholder="Enter amount" min="1"
+                        required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 confirm-btn" id="confirmBtn">Confirm</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- <script>
+        // Dynamically Load Header Content
+        import('/js/header.js').then(({ default: createHeader }) => {
+            createHeader(document.getElementById('header-placeholder'));
+        });
+
+        // Mode toggle logic
+        const toggleModeBtn = document.getElementById('toggleModeBtn');
+        const pageTitle = document.getElementById('pageTitle');
+        const cardSectionTitle = document.getElementById('cardSectionTitle');
+        const amountSectionTitle = document.getElementById('amountSectionTitle');
+        const confirmBtn = document.getElementById('confirmBtn');
+        const cardListPlaceholder = document.getElementById('card-list-placeholder');
+
+        let isTopUpMode = true; // Track the current mode
+
+        toggleModeBtn.addEventListener('click', () => {
+            // Toggle between Top-Up and Withdraw
+            isTopUpMode = !isTopUpMode;
+
+            // Update button text
+            toggleModeBtn.textContent = isTopUpMode ? 'Switch to Withdraw' : 'Switch to Top-Up';
+
+            // Update page content dynamically
+            pageTitle.textContent = isTopUpMode ? 'Top-Up Your Wallet' : 'Withdraw from Your Wallet';
+            cardSectionTitle.textContent = isTopUpMode ? 'Your Linked Cards' : 'Select a Card for Withdrawal';
+            amountSectionTitle.textContent = isTopUpMode ? 'Enter Amount to Top-Up' : 'Enter Amount to Withdraw';
+            confirmBtn.textContent = isTopUpMode ? 'Confirm Top-Up' : 'Confirm Withdrawal';
+
+            // Placeholder for dynamically loading cards (can be updated for Withdraw)
+            cardListPlaceholder.innerHTML = isTopUpMode
+                ? '<p>No cards linked yet. Please add a card to top-up.</p>'
+                : '<p>No cards linked yet. Please add a card to withdraw.</p>';
+        });
+    </script> -->
+</body>
+
+</html>

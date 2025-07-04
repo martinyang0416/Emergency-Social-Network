@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/addCard.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="/js/header.js"></script>
+    <script type="module" src="/js/addCard.js"></script>
+    <script type="module" src="/js/socketClient.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+    <!-- Placeholder for dynamically inserted header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Add Card Form -->
+    <div class="add-card-container">
+        <h1 class="title">Add a New Credit/Debit Card</h1>
+        <form id="addCardForm" class="card-form">
+            <!-- Card Number -->
+            <div class="form-group">
+                <input type="text" id="cardNumber" class="form-control" placeholder="Card number" maxlength="16"
+                    required>
+            </div>
+            <!-- Holder's Name -->
+            <div class="form-group">
+                <input type="text" id="holderName" class="form-control" placeholder="Holder’s name" required>
+            </div>
+            <!-- Month, Year, and CVV -->
+            <div class="form-row row">
+                <div class="form-group col-4">
+                    <input type="number" id="expiryMonth" class="form-control" placeholder="Month" min="1" max="12"
+                        required>
+                </div>
+                <div class="form-group col-4">
+                    <input type="number" id="expiryYear" class="form-control" placeholder="Year" min="2023" required>
+                </div>
+                <div class="form-group col-4">
+                    <input type="number" id="cvv" class="form-control" placeholder="CVV" maxlength="4" min="100"
+                        max="9999" required>
+                </div>
+            </div>
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary w-100 submit-btn" id="submitBtn">Confirm</button>
+        </form>
+    </div>
+
+    <!-- Add Linked Cards Section -->
+    <div class="linked-cards-container">
+        <h2>Your Linked Cards</h2>
+        <div id="linkedCards">
+            <!-- Cards will be dynamically rendered here -->
+        </div>
+    </div>
+
+
+</body>
+
+</html>

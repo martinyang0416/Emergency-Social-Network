@@ -1,0 +1,97 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1000px;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    background-color: white;
+    overflow: auto;
+}
+
+#content h1 {
+    margin-bottom: 15px;
+    font-size: 2rem;
+    word-wrap: break-word;
+}
+
+#content h2 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    color: #00b894;
+    font-size: 1rem;
+}
+
+#status-explanation p {
+    width: 100%;
+    font-size: 0.875rem;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+#status-explanation table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#status-explanation th,
+#status-explanation td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+#status-explanation th {
+    background-color: #f0f0f0;
+    font-size: 1rem;
+}
+
+#agreement-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#terms {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+
+#agreement-section button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 0.875rem;
+}
+
+@media (max-width: 576px) {
+    #content {
+        padding: 10px;
+    }
+
+    #content h1 {
+        font-size: 1.5rem;
+    }
+
+    #content h2 {
+        font-size: 0.875rem;
+    }
+
+    #status-explanation th,
+    #status-explanation td {
+        padding: 8px;
+    }
+
+    #agreement-section button {
+        font-size: 0.75rem;
+        padding: 8px 15px;
+    }
+}

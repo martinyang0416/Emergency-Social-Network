@@ -1,0 +1,1 @@
+views/js holds frontend logic files

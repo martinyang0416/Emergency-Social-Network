@@ -1,0 +1,2666 @@
+openapi: 3.0.0
+info:
+  title: User Management API
+  description: API for managing users and serving web pages
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000
+    description: Local development server
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+paths:
+  /:
+    get:
+      summary: Serve the pre-home page
+      tags: [Pages]
+      responses:
+        "200":
+          description: Pre-home page HTML file served.
+          content:
+            text/html:
+              schema:
+                type: string
+        "500":
+          description: Some server error.
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /join_page:
+    get:
+      summary: Serve the register page
+      tags: [Pages]
+      responses:
+        "200":
+          description: Registration page HTML file served.
+          content:
+            text/html:
+              schema:
+                type: string
+        "500":
+          description: Some server error.
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /home:
+    get:
+      summary: Serve the home page (requires authentication)
+      tags: [Pages]
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Home page HTML file served.
+          content:
+            text/html:
+              schema:
+                type: string
+        "401":
+          description: Unauthorized.
+          content:
+            text/plain:
+              schema:
+                type: string
+        "500":
+          description: Some server error.
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /new_user_acknowledge_page:
+    get:
+      summary: Serve the new user acknowledgment page (requires authentication)
+      tags: [Pages]
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: New user acknowledgment page HTML file served.
+          content:
+            text/html:
+              schema:
+                type: string
+        "401":
+          description: Unauthorized.
+          content:
+            text/plain:
+              schema:
+                type: string
+        "500":
+          description: Some server error.
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /users/:
+    post:
+      summary: Register a new user
+      tags: [Users]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "201":
+          description: User successfully registered, JWT token issued.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  token:
+                    type: string
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      username:
+                        type: string
+        "400":
+          description: User already exists.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+        "500":
+          description: Some server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+  /users/{userName}/validation:
+    post:
+      summary: Validate the user credentials
+      tags: [Users]
+      parameters:
+        - name: userName
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The username to validate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - password
+              properties:
+                password:
+                  type: string
+      responses:
+        "200":
+          description: User authenticated and acknowledged, JWT token issued.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  token:
+                    type: string
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      username:
+                        type: string
+        "202":
+          description: User authenticated but not acknowledged, JWT token issued.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  token:
+                    type: string
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      username:
+                        type: string
+        "400":
+          description: Invalid username or password.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+        "404":
+          description: User does not exist.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "500":
+          description: Some server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+  /users/{userName}/offline:
+    put:
+      summary: Log out the user
+      tags: [Users]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: userName
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The username to log out
+      responses:
+        "200":
+          description: User logged out successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "401":
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "500":
+          description: Some server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+  /users/{userName}/acknowledgement:
+    put:
+      summary: Acknowledge the user
+      tags: [Users]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: userName
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The username to acknowledge
+      responses:
+        "200":
+          description: User acknowledged successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "401":
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "404":
+          description: User not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "500":
+          description: Some server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+  /users/allUsers:
+    get:
+      summary: Get all users classified by status
+      tags: [Users]
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Successfully retrieved all users classified by status.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    userName:
+                      type: string
+                    status:
+                      type: string
+        "401":
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "500":
+          description: Some server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+  /public:
+    get:
+      summary: Serve the public page
+      tags: [Pages]
+      responses:
+        "200":
+          description: Public page HTML file served.
+          content:
+            text/html:
+              schema:
+                type: string
+        "500":
+          description: Some server error.
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /messages:
+    post:
+      summary: Send a public message
+      tags: [Messages]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - message
+              properties:
+                message:
+                  type: string
+                  description: The message to be sent
+      responses:
+        "201":
+          description: Message successfully sent.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "400":
+          description: Bad request. Message content missing.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+        "401":
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "500":
+          description: Some server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+  /messages:
+    get:
+      summary: Fetch all public messages
+      tags: [Messages]
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successfully retrieved all messages.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                    message:
+                      type: string
+                    timestamp:
+                      type: string
+                      format: date-time
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Some server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+  /messages/private:
+    post:
+      summary: Send a private message to a specific user
+      tags: [Messages]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the recipient user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - message
+              properties:
+                message:
+                  type: string
+                  description: The message content to send
+      responses:
+        "201":
+          description: Message successfully sent.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "400":
+          description: Invalid request. Missing data or incorrect user ID.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+        "401":
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "404":
+          description: Recipient not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "500":
+          description: Some server error occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+  /messages/private/{recipient}:
+    get:
+      summary: Get users with unread messages
+      tags: [Messages]
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Successfully retrieved users with unread messages.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "401":
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "500":
+          description: Some server error occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+  /messages/unread:
+    get:
+      summary: Get unread private messages from a specific user
+      tags: [Messages]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: sender
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The username of the sender
+      responses:
+        "200":
+          description: Successfully retrieved unread messages from the user.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                    timestamp:
+                      type: string
+                      format: date-time
+        "401":
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "404":
+          description: No unread messages from the user.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "500":
+          description: Some server error occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+  /messages/unread/{recipient}:
+    get:
+      summary: Get private messages between the current user and another user
+      tags: [Messages]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: recipient
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The username of the other user
+      responses:
+        "200":
+          description: Successfully retrieved private messages.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    sender:
+                      type: string
+                    recipient:
+                      type: string
+                    message:
+                      type: string
+                    timestamp:
+                      type: string
+                      format: date-time
+        "401":
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "404":
+          description: No messages found between the users.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "500":
+          description: Some server error occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+  /messages/private/markRead/{recipient}:
+    put:
+      summary: Mark messages as read between the current user and another user
+      tags: [Messages]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: recipient
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The username of the other user
+      responses:
+        "200":
+          description: Messages marked as read successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "401":
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "404":
+          description: No messages found to update.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "500":
+          description: Some server error occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+  /searches/strategy:
+    put:
+      summary: Provide strategy type
+      tags: [Searches]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                strategyType:
+                  type: string
+                  description: The strategy type to post
+      responses:
+        "200":
+          description: Post strategy successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "401":
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "404":
+          description: No messages found to update.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "500":
+          description: Some server error occurred.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+  /announcements:
+    post:
+      summary: Post an announcement
+      tags: [Announcements]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                content:
+                  type: string
+      responses:
+        "201":
+          description: Announcement created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "400":
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "500":
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+    get:
+      summary: Get all announcements
+      tags: [Announcements]
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Announcements retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    title:
+                      type: string
+                    content:
+                      type: string
+                    dateCreated:
+                      type: string
+                      format: date-time
+        "404":
+          description: No announcements found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "500":
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+  /posts/upload_urls:
+    post:
+      summary: Generate an upload URL
+      tags: [Posts]
+      responses:
+        '200':
+          description: Upload URL generated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uploadUrl:
+                    type: string
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+  /posts/download_urls:
+    post:
+      summary: Generate a download URL
+      tags: [Posts]
+      responses:
+        '200':
+          description: Download URL generated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  downloadUrl:
+                    type: string
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+  /posts/incidents:
+    post:
+      summary: Create a new incident post
+      tags: [Posts]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                incidentTitle:
+                  type: string
+                  description: Title of the incident
+                incidentDetails:
+                  type: string
+                  description: Details about the incident
+                resourceDetails:
+                  type: string
+                  description: Details about the related resources
+                incidentImages:
+                  type: array
+                  items:
+                    type: string
+                  description: Array of URLs for incident-related images
+                resourceImages:
+                  type: array
+                  items:
+                    type: string
+                  description: Array of URLs for resource-related images
+                username:
+                  type: string
+                  description: Username of the creator
+                userstatus:
+                  type: string
+                  description: Status of the user creating the post
+      responses:
+        '201':
+          description: Incident created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  title:
+                    type: string
+                  details:
+                    type: string
+                  resourceDetails:
+                    type: string
+                  incidentImages:
+                    type: array
+                    items:
+                      type: string
+                  resourceImages:
+                    type: array
+                    items:
+                      type: string
+                  username:
+                    type: string
+                  userstatus:
+                    type: string
+                  timestamp:
+                    type: string
+                    format: date-time
+        '400':
+          description: Missing or invalid input data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+    get:
+      summary: Retrieve all incident posts with their associated images
+      tags: [Posts]
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Incident posts retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          description: The unique ID of the incident post
+                        title:
+                          type: string
+                          description: Title of the incident post
+                        details:
+                          type: string
+                          description: Details about the incident
+                        resourceDetails:
+                          type: string
+                          description: Details about associated resources
+                        incidentImages:
+                          type: array
+                          items:
+                            type: string
+                          description: Array of URLs for incident images
+                        resourceImages:
+                          type: array
+                          items:
+                            type: string
+                          description: Array of URLs for resource images
+                        username:
+                          type: string
+                          description: Username of the creator
+                        userstatus:
+                          type: string
+                          description: Status of the user creating the post
+                        timestamp:
+                          type: string
+                          format: date-time
+                          description: Timestamp of when the post was created
+        '404':
+          description: No incident posts found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+  /posts/incidents/{id}:
+    put:
+      summary: Update an existing incident post
+      tags: [Posts]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The ID of the post to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                incidentTitle:
+                  type: string
+                  description: Updated title of the incident
+                incidentDetails:
+                  type: string
+                  description: Updated details about the incident
+                resourceDetails:
+                  type: string
+                  description: Updated details about the resources
+                incidentImages:
+                  type: array
+                  items:
+                    type: string
+                  description: Updated URLs for incident images
+                resourceImages:
+                  type: array
+                  items:
+                    type: string
+                  description: Updated URLs for resource images
+                userstatus:
+                  type: string
+                  description: Updated user status
+      responses:
+        '200':
+          description: Incident updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: Incident post not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+    delete:
+      summary: Delete an existing incident post
+      tags: [Posts]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The ID of the post to delete
+      responses:
+        '200':
+          description: Post deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  id:
+                    type: integer
+        '404':
+          description: Incident post not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+  /posts/incidents/{id}/comments:
+    get:
+      summary: Retrieve comments for a specific incident post
+      tags: [Posts]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The ID of the incident post to retrieve comments for
+      responses:
+        '200':
+          description: Comments retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: The name of the commenter
+                        time:
+                          type: string
+                          format: date-time
+                          description: The time the comment was posted
+                        text:
+                          type: string
+                          description: The content of the comment
+        '404':
+          description: No comments found for the incident post
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+    post:
+      summary: Add a new comment to an incident post
+      tags: [Posts]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The ID of the incident post to add a comment to
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+                  description: The content of the comment
+                sender_name:
+                  type: string
+                  description: The name of the person posting the comment
+                sender_status:
+                  type: string
+                  description: The status of the commenter (e.g., "admin" or "user")
+      responses:
+        '201':
+          description: Comment created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: The ID of the newly created comment
+                      text:
+                        type: string
+                        description: The content of the comment
+                      sender_name:
+                        type: string
+                        description: The name of the commenter
+                      sender_status:
+                        type: string
+                        description: The status of the commenter
+                      incident_id:
+                        type: integer
+                        description: The ID of the related incident post
+                      time:
+                        type: string
+                        format: date-time
+                        description: The time the comment was posted
+        '400':
+          description: Bad request due to missing or invalid fields
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+
+
+
+
+  # Todo
+
+  # Retrieve all private chat messages between two users
+  # messageRouter.get('/public');
+
+  # Post an announcement
+  # messageRouter.post('/announcements');
+
+  # Retrieve all announcements
+  # messageRouter.get('/announcements');
+
+  /emergencyContact/{ownerusername}/available:
+    get:
+      summary: Get a list of available users for emergency contact, excluding current contacts
+      tags: [Users, Emergency Contacts]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ownerusername
+          in: path
+          description: The username of the requesting user.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successfully retrieved available users.
+
+    
+  /map-resources:
+    post:
+      summary: Log a new public resource on the map
+      tags: [Map Resources]
+
+     
+  /resources/allUsers:
+    get:
+      summary: Get all users' resource data
+      tags: [Resources]
+      description: Retrieve resource information for all users.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: A list of users with their resource data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserResources'
+        '401':
+          description: Unauthorized access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /resources/{username}:
+    get:
+      summary: Get a user's resource data
+      tags: [Resources]
+      description: Retrieve resource information for a specific user.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: username
+          schema:
+            type: string
+          required: true
+          description: The username of the user.
+      responses:
+        '200':
+          description: Resource data for the user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResources'
+        '404':
+          description: User not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update a user's resource data
+      tags: [Resources]
+      description: Update the resource quantities for a specific user.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: username
+          schema:
+            type: string
+          required: true
+          description: The username of the user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateResourceRequest'
+      responses:
+        '200':
+          description: Resource updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
+        '400':
+          description: Invalid input data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: User not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /resources/newRequest:
+    post:
+      summary: Create a new resource request
+      tags: [Resources]
+      description: Send a resource request from one user to another.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                location:
+                  type: string
+      responses:
+        '201':
+          description: Map resource logged successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Bad request, missing fields.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+    get:
+      summary: Get all public map resources
+      tags: [Map Resources]
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Map resources retrieved successfully.
+              $ref: '#/components/schemas/NewResourceRequest'
+      responses:
+        '201':
+          description: Resource request created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceRequestResponse'
+        '400':
+          description: Invalid input data or insufficient resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Requested user not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /resources/sentRequests/{username}:
+    get:
+      summary: Get all sent resource requests
+      tags: [Resources]
+      description: Retrieve all resource requests sent by a specific user.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: username
+          schema:
+            type: string
+          required: true
+          description: The username of the requester.
+      responses:
+        '200':
+          description: A list of sent resource requests.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    title:
+                      type: string
+                    description:
+                      type: string
+                    location:
+                      type: string
+                    dateCreated:
+                      type: string
+                      format: date-time
+        '404':
+          description: No map resources found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+  /map-resources/{resourceId}/reviews:
+    post:
+      summary: Add a review to a public map resource
+      tags: [Map Resource Reviews]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: resourceId
+          required: true
+          schema:
+            type: integer
+          description: ID of the map resource to add a review to
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reviewContent:
+                  type: string
+                rating:
+                  type: integer
+                  minimum: 1
+                  maximum: 5
+      responses:
+        '201':
+          description: Review added successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Bad request, missing fields.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: Map resource not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+    get:
+      summary: Get all reviews for a public map resource
+      tags: [Map Resource Reviews]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: resourceId
+          required: true
+          schema:
+            type: integer
+          description: ID of the map resource to retrieve reviews for
+      responses:
+        '200':
+          description: Reviews retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    userName:
+                      type: string
+                    status:
+                      type: string
+        "401":
+          description: Unauthorized.
+                    id:
+                      type: integer
+                    reviewContent:
+                      type: string
+                    rating:
+                      type: integer
+                    dateCreated:
+                      type: string
+                      format: date-time
+                    reviewer:
+                      type: string
+        '404':
+          description: No reviews found for this map resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+
+  /emergencyContact/{ownerusername}/pending:
+    get:
+      summary: Get a list of pending users for emergency contact
+      tags: [Users, Emergency Contacts]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ownerusername
+          in: path
+          description: The username of the requesting user.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successfully retrieved pending users.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    userName:
+                      type: string
+                    status:
+                      type: string
+        "401":
+          description: Unauthorized.
+    
+                  $ref: '#/components/schemas/ResourceRequest'
+        '404':
+          description: No sent requests found for the user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '400':
+          description: Username is required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /resources/request:
+    delete:
+      summary: Withdraw a resource request
+      tags: [Resources]
+      description: Withdraw a previously sent resource request.
+
+
+  /wallet/balance/{username}:
+    get:
+      summary: Get user balance
+      tags: [Wallet]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The username of the wallet owner
+      responses:
+        '200':
+          description: User balance retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  balance:
+                    type: number
+        '404':
+          description: Wallet not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+  /emergencyContact/{ownerusername}/added:
+    get:
+      summary: Get a list of added users for emergency contact
+      tags: [Users, Emergency Contacts]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ownerusername
+          in: path
+          description: The username of the requesting user.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successfully retrieved added users.
+
+  /wallet/cards:
+    post:
+      summary: Add a new card
+      tags: [Wallet]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WithdrawRequest'
+      responses:
+        '200':
+          description: Request withdrawn successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
+        '404':
+          description: Request not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '400':
+          description: Invalid request data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /resources/receivedRequests/{username}:
+    get:
+      summary: Get all received resource requests
+      tags: [Resources]
+      description: Retrieve all resource requests received by a specific user.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: username
+          schema:
+            type: string
+          required: true
+          description: The username of the recipient.
+      responses:
+        '200':
+          description: A list of received resource requests.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    userName:
+                      type: string
+                    status:
+                      type: string
+        "401":
+          description: Unauthorized.
+                  $ref: '#/components/schemas/ResourceRequest'
+        '404':
+          description: No received requests found for the user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '400':
+          description: Username is required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /resources/request/approvedRequest:
+    put:
+      summary: Approve a resource request
+      tags: [Resources]
+      description: Approve a resource request and update resources accordingly.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProcessRequest'
+      responses:
+        '200':
+          description: Request approved and resources updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
+        '404':
+          description: Request not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '400':
+          description: Invalid request data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                
+  /resources/request/rejectedRequest:
+    put:
+      summary: Reject a resource request
+      tags: [Resources]
+      description: Reject a resource request without updating resources.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProcessRequest'
+      responses:
+        '200':
+          description: Request rejected successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
+        '404':
+          description: Request not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '400':
+          description: Invalid request data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              type: object
+              required:
+                - username
+                - cardNumber
+                - holderName
+                - expire_month
+                - expire_year
+                - cvv
+              properties:
+                username:
+                  type: string
+                cardNumber:
+                  type: string
+                holderName:
+                  type: string
+                expire_month:
+                  type: integer
+                expire_year:
+                  type: integer
+                cvv:
+                  type: string
+      responses:
+        '200':
+          description: Card added successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  cardId:
+                    type: integer
+        '409':
+          description: Card already exists for the user.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+  /wallet/cards/{username}:
+    get:
+      summary: Get user cards
+      tags: [Wallet]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The username of the card owner
+      responses:
+        '200':
+          description: Cards retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    card_number:
+                      type: string
+                    card_holder:
+                      type: string
+                    expire_month:
+                      type: integer
+                    expire_year:
+                      type: integer
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+  /emergencyContact/request:
+    post:
+      summary: Send emergency contact request to another user.
+      tags: [Emergency Contacts]
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: The user is sending an emergency contact request.
+        
+  /wallet/verifications:
+    post:
+      summary: Verify CVV for a card
+      tags: [Wallet]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                receiverUserName:
+                  type: string
+                  description: The user to whom the request is being sent.
+      responses:
+        "200":
+          description: Successfully sent the emergency contact request.
+              required:
+                - username
+                - cardNumber
+                - cvv
+                - mode
+                - isTopUpMode
+                - amount
+              properties:
+                username:
+                  type: string
+                cardNumber:
+                  type: string
+                cvv:
+                  type: integer
+                mode:
+                  type: string
+                isTopUpMode:
+                  type: boolean
+                amount:
+                  type: number
+      responses:
+        '200':
+          description: CVV verified successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Pending"
+        '400':
+          description: Insufficient balance or invalid CVV.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "401":
+          description: Unauthorized.
+        '404':
+          description: Card not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+
+  /emergencyContact/pendingRequests/{userName}:
+    get:
+      summary: Get a list of pending emergency contact requests for the receiver.
+      tags: [Emergency Contacts]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: userName
+
+  /wallet/transactions/{username}:
+    get:
+      summary: Get user transactions
+      tags: [Wallet]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The username of the receiving user.
+      responses:
+        "200":
+          description: Successfully retrieved pending requests.
+          description: The username of the transaction owner
+      responses:
+        '200':
+          description: Transactions retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    senderUserName:
+                      type: string
+                    status:
+                      type: string
+        "401":
+          description: Unauthorized.
+                    sender:
+                      type: string
+                    receiver:
+                      type: string
+                    amount:
+                      type: number
+                    transaction_date:
+                      type: string
+                      format: date-time
+        '404':
+          description: No transactions found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+
+  /emergencyContact/acceptance:
+    post:
+      summary: Accept an emergency contact request.
+      tags: [Emergency Contacts]
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: The user confirms accepting the emergency contact request.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                senderUserName:
+                  type: string
+                receiverUserName:
+                  type: string
+      responses:
+        "200":
+          description: Both users are now emergency contacts.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Accepted"
+        "400":
+          description: Bad request (e.g., invalid user or missing data).
+
+  /wallet/statistics/{username}:
+    get:
+      summary: Get user statistics
+      tags: [Wallet]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The username for statistics calculation
+      responses:
+        '200':
+          description: Statistics retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "401":
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "500":
+          description: Some server error.
+                  moneyIn:
+                    type: number
+                  moneyOut:
+                    type: number
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+
+  /emergencyContact/denial:
+    post:
+      summary: Deny an emergency contact request.
+      tags: [Emergency Contacts]
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: The user confirms denying the emergency contact request.
+
+  /wallet/donations:
+    post:
+      summary: Process a donation
+      tags: [Wallet]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+
+              properties:
+                senderUserName:
+                  type: string
+                receiverUserName:
+                  type: string
+      responses:
+        "200":
+          description: The request has been denied, and the pending status is removed.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Denied"
+        "400":
+          description: Bad request (e.g., invalid user or missing data).
+              required:
+                - sender
+                - receiver
+                - amount
+              properties:
+                sender:
+                  type: string
+                receiver:
+                  type: string
+                amount:
+                  type: number
+      responses:
+        '200':
+          description: Donation processed successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "401":
+          description: Unauthorized.
+        '400':
+          description: Insufficient balance or invalid data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+
+  /emergencyContact/resources/{userName}:
+    get:
+      summary: Get a list of resources possessed by the user.
+      tags: [Resources, Emergency Contacts]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: userName
+
+  /wallet/cards/{cardNumber}:
+    delete:
+      summary: Remove a card
+      tags: [Wallet]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: cardNumber
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The name of the emergency contact to share resources with.
+      responses:
+        "200":
+          description: Successfully retrieved resources.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    resource_id:
+                      type: integer
+                    resource_name:
+                      type: string
+                    available_quantity:
+                      type: integer
+        "401":
+          description: Unauthorized.
+        "500":
+          description: Some server error.
+
+  /emergencyContact/resources/{contactusername}/{resourceType}:
+    post:
+      summary: Update the quantity of a resource the user wants to share with an emergency contact.
+      tags: [Emergency Contacts, Resources]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: contactusername
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The name of the emergency contact.
+        - name: resourceType
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the resource being shared.
+      requestBody:
+        description: The quantity of the resource to be shared with the contact.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: integer
+                  description: The number of units of the resource to be shared.
+      responses:
+        "200":
+          description: Successfully updated the resource quantity.
+          description: The card number to remove
+      responses:
+        '200':
+          description: Card removed successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: Card not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Resource shared"
+                  remaining_quantity:
+                    type: integer
+                    description: The remaining quantity of the resource after sharing.
+        "400":
+          description: Bad request (e.g., invalid resource or quantity).
+        "401":
+          description: Unauthorized.
+        "500":
+          description: Internal server error.
+                  message:
+                    type: string
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string

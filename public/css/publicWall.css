@@ -1,0 +1,118 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    font-size: 35px;
+    font-family: "Montserrat", sans-serif;
+}
+
+h2 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+#content {
+    margin-top: 20px;
+    width: 100vw;
+    height: 100vh;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+textarea.form-control {
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    resize: none;
+    margin-bottom: 15px;
+}
+
+textarea.form-control:focus {
+    outline: none;
+    border-color: #00b894;
+    box-shadow: 0 0 10px rgba(0, 184, 148, 0.3);
+}
+
+button.btn-primary {
+    background-color: #00b894;
+    border: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button.btn-primary:hover {
+    background-color: #00cec9;
+    color: white;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.message-container-wrapper {
+    margin-bottom: 200px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#message-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.sender-info {
+    max-width: 50%;
+}
+
+.sender-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.timestamp {
+    white-space: nowrap;
+}
+
+/* Ensure individual message items wrap correctly */
+.list-group-item {
+    word-wrap: break-word;
+    /* Wrap long text */
+    white-space: pre-wrap;
+    /* Preserve whitespace and allow line breaks */
+}
+
+/* Keep the footer chat input fixed at the bottom */
+.fixed-bottom {
+    padding: 10px;
+    background-color: white;
+    border-top: 1px solid #ccc;
+    /* Optional: visual separation */
+    box-sizing: border-box;
+}

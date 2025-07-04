@@ -1,0 +1,220 @@
+body {
+    font-family: "Montserrat", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+.topup-container {
+    width: 90%;
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px 25px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+#card-list-placeholder {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 14px;
+    color: #888;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+#topupAmount {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background-color: #f8f9fa;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#topupAmount:focus {
+    outline: none;
+    border-color: #00b894;
+    box-shadow: 0 0 6px rgba(0, 184, 148, 0.4);
+    background-color: white;
+}
+
+.confirm-btn {
+    background-color: #00b894;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.confirm-btn:hover {
+    background-color: #00cec9;
+}
+
+.mode-toggle {
+    margin-bottom: 20px;
+}
+
+.mode-toggle .btn {
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.mode-toggle .btn:hover {
+    background-color: #5a6268;
+}
+
+/* .credit-card {
+    background-color: #18181b;
+    color: #a1a1aa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 15px -5px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
+    width: 100%;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 20px;
+} */
+
+.credit-card:hover {
+    transform: scale(1.02);
+    /* Slightly enlarge on hover for effect */
+}
+
+.head,
+.number,
+.tail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    z-index: 10;
+}
+
+.head {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.number {
+    margin-top: auto;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+    color: #d4d4d8;
+}
+
+.exp {
+    font-size: 0.8rem;
+}
+
+.exp-date {
+    color: #d4d4d8;
+    font-size: 1.3rem;
+}
+
+.circle1 {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-color: #991b1b;
+    border-radius: 100%;
+    transform: translateY(-30%) translateX(100%);
+}
+
+.circle2 {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-color: #854d0e;
+    border-radius: 100%;
+    transform: translateY(160%);
+}
+
+.credit-card.selected {
+    border: 2px solid #28a745;
+    box-shadow: 0 0 10px rgba(40, 167, 69, 0.7);
+    transform: scale(1.05);
+    transition: all 0.3s ease-in-out;
+}
+
+.credit-card {
+    background-color: #18181b;
+    color: #a1a1aa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 15px -5px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
+    width: 100%;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 20px;
+}
+
+.credit-card:hover {
+    transform: scale(1.02);
+    /* Slight enlarge effect */
+}
+
+.credit-card.selected {
+    border: 10px solid #28a745;
+    /* Green border */
+    box-shadow: 0 0 20px rgba(40, 167, 69, 0.7);
+    /* Glowing effect */
+    transform: scale(1.05);
+    /* Slight enlargement */
+    animation: pulse 1s infinite;
+    /* Pulsating animation */
+    transition: all 0.3s ease-in-out;
+}
+
+/* Keyframes for pulsating animation */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 20px rgba(40, 167, 69, 0.7);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(40, 167, 69, 0.5);
+    }
+
+    100% {
+        box-shadow: 0 0 20px rgba(40, 167, 69, 0.7);
+    }
+}

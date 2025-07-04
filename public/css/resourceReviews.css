@@ -1,0 +1,173 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+
+.sticky-header {
+    position: sticky;
+    bottom: 10px;
+    background: linear-gradient(to right, #00b894, #00cec9);
+    z-index: 1000;
+    padding: 20px;
+    height: 3vh;
+}
+
+#back-button {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#back-button:hover {
+    background-color: #0056b3;
+}
+
+#reviews-container {
+    width: 95%;
+    height: 60vh;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    overflow-y: auto;
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#add-review-btn {
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #00cec9;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#add-review-btn:hover {
+    background-color: #00a1a7;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    width: 95%;
+}
+
+.modal textarea {
+    width: 90%;
+    height: 80px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+    font-size: 14px;
+}
+
+.modal button {
+    margin: 5px;
+}
+
+.modal button[type="submit"] {
+    margin-top: 15px;
+    background-color: #00cec9;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.modal button[type="submit"]:hover {
+    background-color: #00a1a7;
+}
+
+.modal button#cancel-add-review {
+    background-color: #b2bec3;
+    color: black;
+}
+
+.modal button#cancel-add-review:hover {
+    background-color: #7f8c8d;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.review {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+    border: 1px solid #00cec9;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review p:first-child {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.001px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.review p:nth-child(2) {
+    text-align: left;
+    font-size: 1.5rem;
+    margin: 5px 0;
+}
+
+.review p:last-child {
+    font-size: 1rem;
+    color: #333;
+    text-align: left;
+    margin: 0;
+}
