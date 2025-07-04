@@ -1,9 +1,3 @@
-# UPDATE NOTE
-Sigrid is now enabled for this repo.
-You have new GitHub Actions workflow files.
-Accept your Sigrid invitation and review the analysis of your repo.
-Visit Sigrid at https://sigrid-says.com/cmusvfse
-
 # Emergency Social Network (ESN) Project
 
 ## Project Overview
